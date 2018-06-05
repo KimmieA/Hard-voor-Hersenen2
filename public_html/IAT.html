@@ -1,0 +1,504 @@
+<!doctype html>
+<!--Dashboard: Copyright (c) 2017 Creative Tim
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.-->
+
+<html lang="en">
+    <head>                                                          <!--DIT ONDERDEEL NOG AANPASSEN (NET ALS CSS)-->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <meta name="author" content="Sasja de Ruijter en Kim Gerrits"> 
+        <meta name="description" content="Visuele representatie van stroke tijden.">
+
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+
+        <title>AMC Stroke</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" /> 
+        
+
+        <!--  Paper Dashboard core CSS    -->
+        <link href="assets/css/paper-dashboard.css" rel="stylesheet"/> 
+        <link href="assets/css/paper-dashboard.min.css" rel="stylesheet" />
+
+        <!--  Fonts and icons     -->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        
+        <!-- bron die het tekenen van de grafiek ondersteunt -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> </script>
+
+    </head>
+
+    <body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="white" data-active-color="warning"> 
+      
+        <div class="logo">                                        
+            <img src="UVA-logo.png" alt="UVA logo" height=45px>  
+            <img src="AMC-logo.png" alt="AMC logo" height=45px>
+        </div>          
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a href="Dashboard.html">
+                        <i class="fa fa-hospital-o"></i> <!-- i = icon-->
+                        <p>AMC</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="IVT.html">
+                        <i class="fa fa-flask"></i>
+                        <p>IVT</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="IAT.html">
+                        <i class="fa fa-medkit"></i>
+                        <p>IAT</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        </div>
+        
+        <div class="main-panel"> 
+            <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent"> 
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">   
+                        <div class="navbar-toggle"> 
+                            <button type="button" class="navbar-toggler" >
+                                <span class="navbar-toggler-bar bar1"></span> 
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>  
+                        </div>
+                        <a class="navbar-brand">IAT Dashboard</a> 
+                    </div> 
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    </div>
+                </div>
+            </nav> 
+<!--INHOUD-->
+            <div class="content">
+               <!-- <div class="container-fluid">-->
+                    <div class="row">                         
+                        <!--Cijferboxen-->
+                        <div class="col-lg-4"> <!-- col-sm-6 toevoegen als eerst 2 per regen en dan 1. Eerste cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big icon-success"> <!--warning, danger, info, succes-->
+                                                <i class= "fa fa-bell-o text-success"></i> <!--.ns-icon .nc-globe verwijderen uit css-->
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Aantal IAT dit jaar:</p>
+                                                <p class="card-title">495</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-refresh"></i> Update Now
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                
+                        <div class="col-lg-4"> <!--Tweede cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big"> <!--warning, danger, info, succes-->
+                                                <i class="fa fa-line-chart text-success"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Geschat totaal aantal IAT dit jaar:</p>
+                                                <p class="card-title">86</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4"> <!--Derde cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big icon-success"> <!--warning, danger, info, succes-->
+                                                <i class="fa fa-medkit text-success"></i>
+                                            </div>
+                                        </div>
+                                         <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Percentage Drip 'n Ship:</p>
+                                                <p class="card-title">62%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="col-lg-4"> <!--Vierde cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big icon-warning"> <!--warning, danger, info, succes-->
+                                                <i class="fa fa-line-chart text-success"></i>
+                                            </div>
+                                        </div>
+                                       <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Door-to-Groin Mothership:</p>
+                                                <p class="card-title">123</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-refresh"></i> Update Now
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4"> <!--Vijfde cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big icon-warning"> <!--warning, danger, info, succes-->
+                                                <i class="fa fa-line-chart text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Door-to-Groin Drip 'n Ship:</p>
+                                                <p class="card-title">126</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>                
+                
+                    <!--Grafieken en tabellen-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                            <div class="card-body ">
+                                <canvas id="grafiek1" width: 10%; height: 60%></canvas>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                  <i class="fa fa-history"></i> Updated 3 minutes ago
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                        <!-- GRAFIEK 1-->
+                        <!-- het tekenen en specificeren van de grafiek NAAR JS OVERBRENGEN--> 
+                        <script>
+                            let horBarGrafiek1 = document.getElementById('grafiek1').getContext('2d');
+
+                            //Algemene opties van de nPatientgrafiek
+                            Chart.defaults.global.defaultFontSize = 16
+
+                            //Grafiek die aantal patienten weergeeft 
+                            let doorToGroinGrafiek = new Chart(horBarGrafiek1, {
+                                type:'horizontalBar',
+                                data:{
+                                    labels:['Tijd in minuten'],
+                                        datasets:[{
+                                            label: 'Tijd in minuten',
+                                            data:[127],
+                                            backgroundColor:'#d13638', 
+                                            borderWidth:2,
+                                            borderColor:'#e6e6e6',
+                                            hoverBorderWidth:4,
+                                            hoverBorderColor:'#b3b3b3'
+                                        }]
+                                },
+                            options: {
+                                title:{
+                                    display:true,
+                                    text:'Door-to-Groin',
+                                    fontSize:25
+                                }
+                            },
+                            });
+                        </script>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                            <div class="card-body ">
+                                <canvas id="grafiek2" width: 30%; height: 40%></canvas>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- GRAFIEK 2 -->
+                    <script>
+                        //Grafiek die de herkomst van de patiënten laat zien    
+                        let pieGrafiek2 = document.getElementById('grafiek2').getContext('2d');
+                        //Algemene opties van de nPatientgrafiek
+                        Chart.defaults.global.defaultFontSize = 16
+
+                        //Grafiek die aantal patienten weergeeft 
+                        let herkomstPatientGrafiek = new Chart(pieGrafiek2, {
+                            type:'pie', // verschillende grafieken: bar, horizontalBar, pie, line, doughnut, radar, polorArea
+                            data:{
+                                labels:['AMC', 'Slotervaart', 'OLVG Oost', 'VUmc', 'RKZ', 'WFG', 'MCA', 'Waterland', 'Kennemer Gasthuis / Spaarne Haarlem', 'Ter Gooi', 'OLVG West', 'Spaarne Gasthuis Hoofddrop', 'Gemini', 'Flevoziekenhuis', 'Boven Ij'],
+                                datasets:[{
+                                    data:[42, 6, 8, 2, 14, 23, 12, 4, 10, 16, 9, 12, 20, 3, 7, 13],
+                                    backgroundColor:['#f76262', '#f48e5f', '#f2cc5c', '#aaff60', '#60f26d', '#5defa4', '#5ae8ce', '#56d2e2', '#5bb1ef', '#577df2', '#8757ed', '#b461e8', '#e561e8', '#e85fc5', '#ef5f94', '#ed3847'],
+                                    borderWidth:2,
+                                    borderColor:'#ffffff',
+                                    hoverBorderWidth:4,
+                                    hoverBorderColor:'#b3b3b3'
+                                }]
+                            },    
+                            options: {
+                                title:{
+                                    display:true,
+                                    text:'Herkomst patiënten',
+                                    fontSize:25,
+                                },
+                                legend: {
+                                        position:'top'
+                                }
+                            },    
+                        });
+                    </script>
+                 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-body ">
+                                    <canvas id="grafiek3" width: 30%; height: 40%></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <!--GRAFIEK 3-->
+                    <script>
+                        let horBarGrafiek3 = document.getElementById('grafiek3').getContext('2d');
+
+                        //Algemene opties van de nPatientgrafiek
+                        Chart.defaults.global.defaultFontSize = 16
+
+                        //Grafiek die aantal patienten weergeeft 
+                        let workflowMothershipGrafiek = new Chart(horBarGrafiek3, {
+                            type:'horizontalBar', 
+                            data:{
+                                labels:['Door to CT', 'CT to CTA', 'CTA to angio', 'Angio to groin', 'Totaal door to groin' ],
+                                    datasets:[{
+                                    label:'Tijd in minuten',
+                                    data:[9, 15, 40.5, 20, 95],
+                                    backgroundColor:['#fffae6','#fff0b3', '#ffe680', '#ffdb4d', '#ffd11a'],
+                                    borderWidth:2,
+                                    borderColor: 'white',
+                                    hoverBorderWidth:4,
+                                    hoverBorderColor:'#666666'
+                                }]
+                            },
+                        options: {
+                            title:{
+                                display:true,
+                                text:'Workflow in Mothership',
+                                fontSize:25
+                            }
+                        },
+                        });
+                    </script>
+         
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-body ">
+                                    <canvas id="grafiek4" width: 30%; height: 40%></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GRAFIEK 4--> 
+                    <script>
+                        let horBarGrafiek4 = document.getElementById('grafiek4').getContext('2d');
+
+                        //Grafiek die aantal patienten weergeeft 
+                        let workflowDripNShipGrafiek = new Chart(horBarGrafiek4, {
+                            type:'horizontalBar', 
+                            data:{
+                                labels:['Door to CT', 'CT to CTA', 'CTA to angio', 'Angio to groin', 'Totaal door to groin' ],
+                                    datasets:[{
+                                    label:'Tijd in minuten',
+                                    data:[9, 15, 40.5, 20, 95],
+                                    backgroundColor:['#ccebff', '#80ccff', '#33adff', '#008ae6', '#005c99'],
+                                    borderWidth:2,
+                                    borderColor: 'white',
+                                    hoverBorderWidth:4,
+                                    hoverBorderColor:'#666666'
+                                }]
+                            },
+                            options: {
+                                title:{
+                                    display:true,
+                                    text:'Workflow in drip n ship',
+                                    fontSize:25
+                                }
+                            },
+                        });
+                    </script>
+                
+                <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-body ">
+                                    <canvas id="grafiek5" width: 30%; height: 40%></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GRAFIEK 5--> 
+                    <script>
+                        let horBarGrafiek5 = document.getElementById('grafiek5').getContext('2d');
+
+                        //Grafiek die aantal patienten weergeeft 
+                        let reperfusieGrafiek = new Chart(horBarGrafiek5, {
+                            type:'horizontalBar', 
+                            data:{
+                                labels:[''],
+                                    datasets:[{
+                                        label:'TICI0',
+                                        data:[9],
+                                        backgroundColor:['#e6ffe6','#b3ffb3', '#66ff66', '#00cc00', '#006600'],
+                                        borderWidth:2,
+                                        borderColor: 'white',
+                                        hoverBorderWidth:4,
+                                        hoverBorderColor:'#666666'
+                                    },
+                                    {
+                                        label:'TICI1',
+                                        data:[3],
+                                        backgroundColor:['#b3ffb3'],
+                                        borderWidth:2,
+                                        borderColor: 'white',
+                                        hoverBorderWidth:4,
+                                        hoverBorderColor:'#666666'
+                                    },
+                                    {
+                                        label:'TICI2a',
+                                        data:[5],
+                                        backgroundColor:['#66ff66'],
+                                        borderWidth:2,
+                                        borderColor: 'white',
+                                        hoverBorderWidth:4,
+                                        hoverBorderColor:'#666666'
+                                    },
+                                    {
+                                        label:'TICI2b',
+                                        data:[2],
+                                        backgroundColor:['#00cc00'],
+                                        borderWidth:2,
+                                        borderColor: 'white',
+                                        hoverBorderWidth:4,
+                                        hoverBorderColor:'#666666'
+                                    },
+                                    {
+                                        label:'TICI2c',
+                                        data:[9],
+                                        backgroundColor:['#006600'],
+                                        borderWidth:2,
+                                        borderColor: 'white',
+                                        hoverBorderWidth:4,
+                                        hoverBorderColor:'#666666'
+                                    },
+                                    {
+                                        label:'TICI3',
+                                        data:[2],
+                                        backgroundColor:['#003300'],
+                                        borderWidth:2,
+                                        borderColor: 'white',
+                                        hoverBorderWidth:4,
+                                        hoverBorderColor:'#666666'
+                                    }]
+                            },
+                            options: {
+                                title:{
+                                    display:true,
+                                    text:'Reperfusie resultaten',
+                                    fontSize:25
+                                },
+                                scales:{
+                                    xAxes:[{
+                                        stacked: true
+                                    }],
+                                    yAxes: [{
+                                        stacked: true
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+            </div> 
+            <!--EINDE INHOUDPAGINA-->
+           <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="credits ml-auto">
+                            <p>Mede mogelijk gemaakt door Hard voor Hersenen. </p> 
+                        </div>
+                    </div>
+                </div>                        
+            </footer>
+            </div>
+        </div>
+    </body>
+
+    <!--   Core JS Files  -->
+    <script src="JS/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="JS/bootstrap.min.js" type="text/javascript"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+    <script src="JS/paper-dashboard.js"></script>
+</html>
