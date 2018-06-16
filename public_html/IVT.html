@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
-        <title>AMC Stroke</title>
+        <title>A-UMC Stroke</title>
 
         <!-- Bootstrap core CSS -->
         <link href="bootstrap.min.css" rel="stylesheet" /> 
@@ -30,6 +30,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         
         <!-- bron die het tekenen van de grafiek ondersteunt -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> </script>
+        
+        <!--AANGEPAST 14-6. Linken naar JS voor file inlezen en naar JSON-->
+        <script src="GrafiekenTekenen.js"></script> 
 
     </head>
 
@@ -85,167 +88,115 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             <!--INHOUD-->
             
             <div class="content">
-                    <div class="row">                         
-                        <!--Cijferboxen-->
-                        <div class="col-lg-4"> <!-- col-sm-6 toevoegen als eerst 2 per regen en dan 1. Eerste cijferbox-->
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big"> <!--warning, danger, info, succes-->
-                                                <i class= "fa fa-bell-o text-success"></i> <!--.ns-icon .nc-globe verwijderen uit css-->
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Aantal IVT dit jaar:</p>
-                                                <p class="card-title">495</p>
-                                            </div>
+                <div class="row">                         
+                    <!--Cijferboxen-->
+                    <div class="col-lg-4"> <!-- col-sm-6 toevoegen als eerst 2 per regen en dan 1. Eerste cijferbox-->
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big"> <!--warning, danger, info, succes-->
+                                            <i class= "fa fa-bell-o text-success"></i> <!--.ns-icon .nc-globe verwijderen uit css-->
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Update Now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                
-                        <div class="col-lg-4"> <!--Tweede cijferbox-->
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big"> <!--warning, danger, info, succes-->
-                                                <i class="fa fa-flask text-warning"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Geschat totaal aantal IVT dit jaar: </p>
-                                                <p class="card-title">86</p>
-                                            </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Aantal IVT dit jaar:</p>
+                                            <p class="card-title">495</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer ">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"> <!--Derde cijferbox-->
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big"> <!--warning, danger, info, succes-->
-                                                <i class="fa fa-medkit text-success"></i>
-                                            </div>
-                                        </div>
-                                         <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Door-to-Needle:</p>
-                                                <p class="card-title">123</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                
-                
-                    <!--Grafieken en tabellen-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card ">
-                            <div class="card-body ">
-                                <canvas id="grafiek1"></canvas>
                             </div>
                             <div class="card-footer ">
                                 <hr>
                                 <div class="stats">
-                                  <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    <i class="fa fa-refresh"></i> Update Now
                                 </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                        <!-- GRAFIEK 1-->
-                    <script>
-                        let horBarGrafiek1 = document.getElementById('grafiek1').getContext('2d');
-                        let doorToNeedleGrafiek1 = new Chart(horBarGrafiek1, {
-                            type:'horizontalBar',
-                            data:{
-                                labels:['Tijd in minuten'],
-                                datasets:[{
-                                    label: 'Tijd in minuten',
-                                    data:[127],
-                                    backgroundColor:'#d13638', 
-                                    borderWidth:2,
-                                    borderColor:'#e6e6e6',
-                                    hoverBorderWidth:4,
-                                    hoverBorderColor:'#b3b3b3'
-                                }]
-                            },
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Door-to-Needle',
-                                    fontSize:25
-                                }
-                            }
-                        });
-                    </script>
-                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card ">
-                            <div class="card-body ">
-                                <canvas id="grafiek2"></canvas>
                             </div>
                         </div>
-                      </div>
+                    </div>                
+                    <div class="col-lg-4"> <!--Tweede cijferbox-->
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big"> <!--warning, danger, info, succes-->
+                                            <i class="fa fa-flask text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Geschat totaal aantal IVT dit jaar: </p>
+                                            <p class="card-title">86</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- GRAFIEK 2 -->
-                    <script>
-                        //Grafiek die de functionele uitkomsten laat zien    
-                        let pieGrafiek2 = document.getElementById('grafiek2').getContext('2d');
-                        let functioneleUitkomstGrafiek = new Chart(pieGrafiek2, {
-                            type:'pie', // verschillende grafieken: bar, horizontalBar, pie, line, doughnut, radar, polorArea
-                            data:{
-                                labels:['mRS0', 'mRS1', 'mRS2', 'mRS3', 'mRS4', 'mRS5', 'mRS6'],
-                                datasets:[{
-                                    data:[5.8, 12.2, 20.1, 11.1, 14.3, 10.6, 25.9],
-                                    backgroundColor:['#f76262', '#f48e5f', '#f2cc5c', '#aaff60', '#60f26d', '#5ae8ce', '#56d2e2'],
-                                    borderWidth:2,
-                                    borderColor:'#ffffff',
-                                    hoverBorderWidth:4,
-                                    hoverBorderColor:'#b3b3b3'
-                                }]
-                            },    
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Functionele uitkomst',
-                                    fontSize:25,
-                                },
-                                legend: {
-                                        position:'top'
-                                }
-                            } 
-                        });
-                    </script>
+                    <div class="col-lg-4"> <!--Derde cijferbox-->
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5 col-md-4">
+                                        <div class="icon-big"> <!--warning, danger, info, succes-->
+                                            <i class="fa fa-medkit text-success"></i>
+                                        </div>
+                                    </div>
+                                     <div class="col-7 col-md-8">
+                                        <div class="numbers">
+                                            <p class="card-category">Door-to-Needle:</p>
+                                            <p class="card-title">123</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+
+                <!--Grafieken en tabellen-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                        <div class="card-body ">
+                            <canvas id="grafiekDtN">
+                                <script>
+                                    tekenGrafiekDtN();
+                                </script>
+                            </canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                        <div class="card-body ">
+                            <canvas id="grafiekFunctUitkomst">
+                                <script>
+                                    tekenGrafiekFunctUitkomst()
+                                </script>
+                            </canvas>
+                        </div>
+                    </div>
+                  </div>
+                </div>
             </div> 
+            
             <!--EINDE INHOUDPAGINA-->
            <footer class="footer">
                 <div class="container-fluid">

@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
-        <title>AMC Stroke</title>
+        <title>A-UMC Stroke</title>
 
         <!-- Bootstrap core CSS -->
         <link href="bootstrap.min.css" rel="stylesheet" /> 
@@ -31,6 +31,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         
         <!-- bron die het tekenen van de grafiek ondersteunt -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> </script>
+        
+        <!--AANGEPAST 14-6. Linken naar JS voor file inlezen en naar JSON-->
+        <script src="GrafiekenTekenen.js"></script> 
 
     </head>
 
@@ -220,265 +223,71 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                         <div class="col-md-12">
                             <div class="card ">
                             <div class="card-body ">
-                                <canvas id="grafiek1"></canvas>
-                            </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                  <i class="fa fa-history"></i> Updated 3 minutes ago
-                                </div>
-                          </div>
+                                <canvas id="grafiekDtG">
+                                    <script>
+                                            tekenGrafiekDtG();
+                                    </script>
+                                </canvas>
+                            </div>                           
                         </div>
                       </div>
-                    </div>
-                        <!-- GRAFIEK 1-->
-                        <!-- het tekenen en specificeren van de grafiek NAAR JS OVERBRENGEN--> 
-                        <script>
-                            let horBarGrafiek1 = document.getElementById('grafiek1').getContext('2d');
-
-                            //Algemene opties van de nPatientgrafiek
-                            Chart.defaults.global.defaultFontSize = 16;
-
-                            //Grafiek die aantal patienten weergeeft 
-                            let doorToGroinGrafiek = new Chart(horBarGrafiek1, {
-                                type:'horizontalBar',
-                                data:{
-                                    labels:['Tijd in minuten'],
-                                        datasets:[{
-                                            label: 'Tijd in minuten',
-                                            data:[127],
-                                            backgroundColor:'#d13638', 
-                                            borderWidth:2,
-                                            borderColor:'#e6e6e6',
-                                            hoverBorderWidth:4,
-                                            hoverBorderColor:'#b3b3b3'
-                                        }]
-                                },
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Door-to-Groin',
-                                    fontSize:25
-                                }
-                            }
-                            });
-                        </script>
+                    </div>                   
                     
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card ">
                             <div class="card-body ">
-                                <canvas id="grafiek2"></canvas>
+                                <canvas id="grafiekHerkomst">
+                                    <script>
+                                            tekenGrafiekHerkomst();
+                                    </script>
+                                </canvas>
                             </div>
                         </div>
                       </div>
                     </div>
-                    <!-- GRAFIEK 2 -->
-                    <script>
-                        //Grafiek die de herkomst van de patiënten laat zien    
-                        let pieGrafiek2 = document.getElementById('grafiek2').getContext('2d');
-                        //Algemene opties van de nPatientgrafiek
-                        Chart.defaults.global.defaultFontSize = 16;
-
-                        //Grafiek die aantal patienten weergeeft 
-                        let herkomstPatientGrafiek = new Chart(pieGrafiek2, {
-                            type:'pie', // verschillende grafieken: bar, horizontalBar, pie, line, doughnut, radar, polorArea
-                            data:{
-                                labels:['AMC', 'Slotervaart', 'OLVG Oost', 'VUmc', 'RKZ', 'WFG', 'MCA', 'Waterland', 'Kennemer Gasthuis / Spaarne Haarlem', 'Ter Gooi', 'OLVG West', 'Spaarne Gasthuis Hoofddrop', 'Gemini', 'Flevoziekenhuis', 'Boven Ij'],
-                                datasets:[{
-                                    data:[42, 6, 8, 2, 14, 23, 12, 4, 10, 16, 9, 12, 20, 3, 7, 13],
-                                    backgroundColor:['#f76262', '#f48e5f', '#f2cc5c', '#aaff60', '#60f26d', '#5defa4', '#5ae8ce', '#56d2e2', '#5bb1ef', '#577df2', '#8757ed', '#b461e8', '#e561e8', '#e85fc5', '#ef5f94', '#ed3847'],
-                                    borderWidth:2,
-                                    borderColor:'#ffffff',
-                                    hoverBorderWidth:4,
-                                    hoverBorderColor:'#b3b3b3'
-                                }]
-                            },    
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Herkomst patiënten',
-                                    fontSize:25,
-                                },
-                                legend: {
-                                        position:'top'
-                                }
-                            }   
-                        });
-                    </script>
                  
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card ">
                                 <div class="card-body ">
-                                    <canvas id="grafiek3"></canvas>
+                                    <canvas id="grafiekMothershipWF">
+                                        <script>
+                                            tekenGrafiekMothershipWF();
+                                        </script>
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                <!--GRAFIEK 3-->
-                    <script>
-                        let horBarGrafiek3 = document.getElementById('grafiek3').getContext('2d');
-
-                        //Algemene opties van de nPatientgrafiek
-                        Chart.defaults.global.defaultFontSize = 16;
-
-                        //Grafiek die aantal patienten weergeeft 
-                        let workflowMothershipGrafiek = new Chart(horBarGrafiek3, {
-                            type:'horizontalBar', 
-                            data:{
-                                labels:['Door to CT', 'CT to CTA', 'CTA to angio', 'Angio to groin', 'Totaal door to groin' ],
-                                    datasets:[{
-                                    label:'Tijd in minuten',
-                                    data:[9, 15, 40.5, 20, 95],
-                                    backgroundColor:['#fffae6','#fff0b3', '#ffe680', '#ffdb4d', '#ffd11a'],
-                                    borderWidth:2,
-                                    borderColor: 'white',
-                                    hoverBorderWidth:4,
-                                    hoverBorderColor:'#666666'
-                                }]
-                            },
-                        options: {
-                            title:{
-                                display:true,
-                                text:'Workflow in Mothership',
-                                fontSize:25
-                            }
-                        }
-                        });
-                    </script>
-         
+                             
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card ">
                                 <div class="card-body ">
-                                    <canvas id="grafiek4"></canvas>
+                                    <canvas id="grafiekWorkflowDnS">
+                                        <script>
+                                            tekenGrafiekWorkflowDnS();
+                                        </script>                                        
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- GRAFIEK 4--> 
-                    <script>
-                        let horBarGrafiek4 = document.getElementById('grafiek4').getContext('2d');
-
-                        //Grafiek die aantal patienten weergeeft 
-                        let workflowDripNShipGrafiek = new Chart(horBarGrafiek4, {
-                            type:'horizontalBar', 
-                            data:{
-                                labels:['Door to CT', 'CT to CTA', 'CTA to angio', 'Angio to groin', 'Totaal door to groin' ],
-                                    datasets:[{
-                                    label:'Tijd in minuten',
-                                    data:[9, 15, 40.5, 20, 95],
-                                    backgroundColor:['#ccebff', '#80ccff', '#33adff', '#008ae6', '#005c99'],
-                                    borderWidth:2,
-                                    borderColor: 'white',
-                                    hoverBorderWidth:4,
-                                    hoverBorderColor:'#666666'
-                                }]
-                            },
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Workflow in drip n ship',
-                                    fontSize:25
-                                }
-                            }
-                        });
-                    </script>
                 
                 <div class="row">
                         <div class="col-md-12">
                             <div class="card ">
                                 <div class="card-body ">
-                                    <canvas id="grafiek5"></canvas>
+                                    <canvas id="grafiekReperfusie">
+                                        <script>
+                                            tekenGrafiekReperfusie();
+                                        </script>
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- GRAFIEK 5--> 
-                    <script>
-                        let horBarGrafiek5 = document.getElementById('grafiek5').getContext('2d');
-
-                        //Grafiek die aantal patienten weergeeft 
-                        let reperfusieGrafiek = new Chart(horBarGrafiek5, {
-                            type:'horizontalBar', 
-                            data:{
-                                labels:[''],
-                                    datasets:[{
-                                        label:'TICI0',
-                                        data:[9],
-                                        backgroundColor:['#e6ffe6','#b3ffb3', '#66ff66', '#00cc00', '#006600'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'TICI1',
-                                        data:[3],
-                                        backgroundColor:['#b3ffb3'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'TICI2a',
-                                        data:[5],
-                                        backgroundColor:['#66ff66'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'TICI2b',
-                                        data:[2],
-                                        backgroundColor:['#00cc00'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'TICI2c',
-                                        data:[9],
-                                        backgroundColor:['#006600'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'TICI3',
-                                        data:[2],
-                                        backgroundColor:['#003300'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    }]
-                            },
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Reperfusie resultaten',
-                                    fontSize:25
-                                },
-                                scales:{
-                                    xAxes:[{
-                                        stacked: true
-                                    }],
-                                    yAxes: [{
-                                        stacked: true
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
             </div> 
             <!--EINDE INHOUDPAGINA-->
             

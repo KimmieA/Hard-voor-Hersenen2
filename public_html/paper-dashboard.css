@@ -163,7 +163,7 @@ body {
   padding-top: 0.5rem;
   padding-bottom: 0.7rem;
   line-height: 1.625rem;
-  color: #AA273D !important;
+  color: #AA273D !important; /*#f07915 als we oranje willen van het logo en #eb000b als we rood willen en #003942 als we blauw willen*/
   font-weight: bold;
 }
 
@@ -253,13 +253,14 @@ body {
 .sidebar .logo,
 .off-canvas-sidebar .logo {
   position: relative;
-  padding: 8px 0.7rem;
-    padding-top: 12px;
+  margin-left: 1.2em;
+  margin-top: -0.5em;
+  margin-bottom: 0.5em;
   z-index: 4;
 }
 
 img{
-    height: 45px;
+    height: 65px;
 }
                                                                     /*lijntje onder logo's links*/
 /*.sidebar .logo:after,                                                    

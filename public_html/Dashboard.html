@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
-        <title>AMC Stroke</title>
+        <title>A-UMC Stroke</title>
 
         <!-- Bootstrap core CSS -->
         <link href="bootstrap.min.css" rel="stylesheet" /> 
@@ -30,6 +30,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         
         <!-- bron die het tekenen van de grafiek ondersteunt -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> </script>
+        
+        <!--AANGEPAST 14-6. Linken naar JS voor grafieken tekenen --> <!--AANPASSEN NAAR MINDER DUPLICATIE?-->
+        <script src="GrafiekenTekenen.js"></script> 
+        
+        <!--AANGEPAST 16-6. Linken naar JS voor data inlezen en naar JSON-->
+        <script src="DataInlezen.js"></script>
 
     </head>
 
@@ -38,15 +44,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <div class="sidebar" data-color="white" data-active-color="warning"> 
       
         <div class="logo">           
-            <img src="UVA-logo.png" alt="UVA logo">  
-            <img src="AMC-logo.png" alt="AMC logo">
+            <img src="amsterdam-umc.jpg" alt="AMsterdam UMC logo">
         </div>          
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="active">
                     <a href="Dashboard.html">
                         <i class="fa fa-hospital-o"></i> <!-- i = icon-->
-                        <p>AMC</p>
+                        <p>A-UMC locatie AMC</p>
                     </a>
                 </li>
                 <li>
@@ -76,7 +81,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                 <span class="navbar-toggler-bar bar3"></span>
                             </button>  
                         </div>
-                            <a class="navbar-brand">AMC Dashboard</a> 
+                            <a class="navbar-brand">Amsterdam UMC locatie AMC</a> 
                         </div> 
                         <div class="collapse navbar-collapse " id="navigation"> <!--6-6 aangepast-->
                         </div>
@@ -237,7 +242,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                    </div>                   
+                
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <script>
+                                csvJSON('Strokedashboard tijden_anoniem_Label_ipv_value.csv');
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                
                 
                     <!--Grafieken en tabellen-->
                     <div class="row">
@@ -247,133 +263,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                     <h5 class="card-title">Users Behavior</h5>
                                     <p class="card-category">24 Hours performance</p>
                                 </div> --> <!--OPMAAK ZOALS DE BOXEN ERBOVEN, MAAR DAN IS HIER DUS DE TITEL EN NIET IN GRAFIEK--> 
-                            <div class="card-body ">
-                                <canvas id="grafiek1"></canvas>
-                            </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                  <i class="fa fa-history"></i> Updated 3 minutes ago
-                                </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                        <!-- het tekenen en specificeren van de grafiek NAAR JS OVERBRENGEN--> 
-                        <script>
-                            let grafiek1 = document.getElementById('grafiek1').getContext('2d');
-
-                            //Algemene opties van de nPatientgrafiek
-                            Chart.defaults.global.defaultFontSize = 16;
-
-                            //Grafiek die aantal patienten weergeeft 
-                            let nPatientGrafiek = new Chart(grafiek1, {
-                                type:'bar', // verschillende grafieken: bar, horizontalBar, pie, line, doughnut, radar, polorArea
-                                data:{
-                                    labels:['IVT', 'IAT', 'AHHA', 'IVT + IAT', 'Totaal'],
-                                        datasets:[{
-                                        label:'Patiënten',
-                                        data:[230, 401, 826, 631, 1457],
-                                        backgroundColor:['#ffccb3', '#ff9966', '#ff7733', '#b33c00', '#802b00'],
-                                        borderWidth:2,
-                                        borderColor:'#e6e6e6',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#b3b3b3'
-                                    }]
-                                },
-                                options: {
-                                    title:{
-                                        display:true,
-                                        text:'Totaal aantal patiënten',
-                                        fontSize:25
-                                    }
-                                }
-                            });
-                        </script>
-                    
-                                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card ">
                                 <div class="card-body ">
-                                    <canvas id="grafiek2"></canvas>
+                                    <canvas id="grafiekAantalPat">
+                                        <script>
+                                            tekenGrafiekAantalPat();
+                                        </script>
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- GRAFIEK 5--> 
-                    <script>
-                        let horBarGrafiek2 = document.getElementById('grafiek2').getContext('2d');
-
-                        //Grafiek die aantal patienten weergeeft 
-                        let aantalPatientenGrafiek = new Chart(horBarGrafiek2, {
-                            type:'horizontalBar', 
-                            data:{
-                                labels:['Patiënten'],
-                                    datasets:[{
-                                        label:'IVT',
-                                        data:[9],
-                                        backgroundColor:['#ccebff'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'IAT',
-                                        data:[3],
-                                        backgroundColor:['#80ccff'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'AHHA',
-                                        data:[5],
-                                        backgroundColor:['#33adff'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'IAT + IVT',
-                                        data:[2],
-                                        backgroundColor:['#008ae6'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    },
-                                    {
-                                        label:'Totaal',
-                                        data:[2],
-                                        backgroundColor:['#005c99'],
-                                        borderWidth:2,
-                                        borderColor: 'white',
-                                        hoverBorderWidth:4,
-                                        hoverBorderColor:'#666666'
-                                    }]
-                            },
-                            options: {
-                                title:{
-                                    display:true,
-                                    text:'Aantal patiënten',
-                                    fontSize:25
-                                },
-                                scales:{
-                                    xAxes:[{
-                                        stacked: true
-                                    }],
-                                    yAxes: [{
-                                        stacked: true
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
+                    </div>                        
                 </div> 
             <!--EINDE INHOUDPAGINA--> 
             
