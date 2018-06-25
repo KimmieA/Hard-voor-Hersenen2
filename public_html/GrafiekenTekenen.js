@@ -1,5 +1,4 @@
-
-function tekenGrafiekAantalPat(){
+function tekenGrafiekAantalPate(){
     let grafiekPatAantal = document.getElementById('grafiekAantalPat').getContext('2d');
 
     //Grafiek die aantal patienten weergeeft 
@@ -22,8 +21,15 @@ function tekenGrafiekAantalPat(){
                 display:true,
                 text:'Totaal aantal patiënten',
                 fontSize:25
+            },
+            scales: {                   //AANGEPAST 22-6
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
-        }
+        } 
     });
 }
 
@@ -50,8 +56,15 @@ function tekenGrafiekDtG(){
             display:true,
             text:'Door-to-Groin',
             fontSize:25
-        }
-    }
+        },
+            scales: {                   //AANGEPAST 22-6
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        } 
     });
 }
 
@@ -109,8 +122,15 @@ function tekenGrafiekMothershipWF(){
             display:true,
             text:'Workflow in Mothership',
             fontSize:25
-        }
-    }
+        },
+            scales: {                   //AANGEPAST 22-6
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        } 
     });
 }
 
@@ -137,8 +157,15 @@ function tekenGrafiekWorkflowDnS(){
                 display:true,
                 text:'Workflow in drip n ship',
                 fontSize:25
+            },
+            scales: {                   //AANGEPAST 22-6
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
-        }
+        } 
     });
 }
 
@@ -245,8 +272,15 @@ function tekenGrafiekDtN(){
                 display:true,
                 text:'Door-to-Needle',
                 fontSize:25
+            },
+            scales: {                   //AANGEPAST 22-6
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
-        }
+        } 
     });
 }
 
@@ -260,7 +294,7 @@ function tekenGrafiekFunctUitkomst(){
             labels:['mRS0', 'mRS1', 'mRS2', 'mRS3', 'mRS4', 'mRS5', 'mRS6'],
             datasets:[{
                 data:[5.8, 12.2, 20.1, 11.1, 14.3, 10.6, 25.9],
-                backgroundColor:['#f76262', '#f48e5f', '#f2cc5c', '#aaff60', '#60f26d', '#5ae8ce', '#56d2e2'],
+                backgroundColor:['#56d2e2', '#5ae8ce', '#60f26d', '#aaff60', '#f2cc5c', '#f48e5f', '#f76262'], //AANGEPAST 22-6
                 borderWidth:2,
                 borderColor:'#ffffff',
                 hoverBorderWidth:4,

@@ -163,7 +163,7 @@ body {
   padding-top: 0.5rem;
   padding-bottom: 0.7rem;
   line-height: 1.625rem;
-  color: #AA273D !important; /*#f07915 als we oranje willen van het logo en #eb000b als we rood willen en #003942 als we blauw willen*/
+  color: #f07915 !important; /*#AA273D als we amc rood willen en #f07915 als we oranje willen van het logo en #eb000b als we rood willen en #003942 als we blauw willen*/
   font-weight: bold;
 }
 
@@ -968,8 +968,3 @@ img{
       margin-bottom: 10px !important;
   }
 } 
-
-canvas{
-    width: 30%; 
-    height: 40%
-}

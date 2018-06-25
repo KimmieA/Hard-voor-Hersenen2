@@ -6,7 +6,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.-->
 
 <html lang="en">
-    <head>                                                      
+    <head>                                                         
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
@@ -22,7 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <link href="bootstrap.min.css" rel="stylesheet" /> 
 
         <!--  Paper Dashboard core CSS    -->
-        <link href="paper-dashboard.css" rel="stylesheet"/> 
+        <link href="Dashboard.css" rel="stylesheet"/> 
 
         <!--  Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -31,18 +31,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <!-- bron die het tekenen van de grafiek ondersteunt -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"> </script>
         
-        <!--AANGEPAST 14-6. Linken naar JS voor file inlezen en naar JSON-->
+        <!--AANGEPAST 14-6. Linken naar JS voor grafieken tekenen --> <!--AANPASSEN NAAR MINDER DUPLICATIE?-->
         <script src="GrafiekenTekenen.js"></script> 
-
+        
+        <!--AANGEPAST 16-6. Linken naar JS voor data inlezen en naar JSON-->
+        <script src="DataInlezen.js"></script>
     </head>
 
     <body>
     <div class="wrapper">
         <div class="sidebar" data-color="white" data-active-color="warning"> 
       
-        <div class="logo">                                        
-            <img src="UVA-logo.png" alt="UVA logo"> 
-            <img src="AMC-logo.png" alt="AMC logo">
+        <div class="logo">           
+            <img src="amsterdam-umc.jpg" alt="AMsterdam UMC logo">
         </div>          
         <div class="sidebar-wrapper">
             <ul class="nav">
@@ -96,7 +97,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                 <div class="row">
                                     <div class="col-5 col-md-4">
                                         <div class="icon-big"> <!--warning, danger, info, succes-->
-                                            <i class= "fa fa-bell-o text-success"></i> <!--.ns-icon .nc-globe verwijderen uit css-->
+                                            <i class= "fa fa-clock-o text-success"></i> <!--.ns-icon .nc-globe verwijderen uit css-->
                                         </div>
                                     </div>
                                     <div class="col-7 col-md-8">
@@ -107,12 +108,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-refresh"></i> Update Now
-                                </div>
-                            </div>
                         </div>
                     </div>                
                     <div class="col-lg-4"> <!--Tweede cijferbox-->
@@ -121,7 +116,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                 <div class="row">
                                     <div class="col-5 col-md-4">
                                         <div class="icon-big"> <!--warning, danger, info, succes-->
-                                            <i class="fa fa-flask text-warning"></i>
+                                            <i class="fa fa-flask text-success"></i>
                                         </div>
                                     </div>
                                     <div class="col-7 col-md-8">
@@ -130,12 +125,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                             <p class="card-title">86</p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
                                 </div>
                             </div>
                         </div>
@@ -151,16 +140,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                     </div>
                                      <div class="col-7 col-md-8">
                                         <div class="numbers">
-                                            <p class="card-category">Door-to-Needle:</p>
+                                            <p class="card-category">Deur-tot-Naald:</p>
                                             <p class="card-title">123</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                <div class="card-footer ">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
+                                    </div>
                                 </div>
                             </div>
                         </div>

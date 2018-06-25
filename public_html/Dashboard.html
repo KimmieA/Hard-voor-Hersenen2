@@ -22,7 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <link href="bootstrap.min.css" rel="stylesheet" /> 
 
         <!--  Paper Dashboard core CSS    -->
-        <link href="paper-dashboard.css" rel="stylesheet"/> 
+        <link href="Dashboard.css" rel="stylesheet"/> 
 
         <!--  Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -34,12 +34,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <!--AANGEPAST 14-6. Linken naar JS voor grafieken tekenen --> <!--AANPASSEN NAAR MINDER DUPLICATIE?-->
         <script src="GrafiekenTekenen.js"></script> 
         
-        <!--AANGEPAST 16-6. Linken naar JS voor data inlezen en naar JSON-->
+        <!--AANGEPAST 16-6 en later. Linken naar JS voor data inlezen en naar JSON-->
         <script src="DataInlezen.js"></script>
+        <script src="xlsx.core.min.js"></script>
+        <script src="xlsx.full.min.js"></script>
+        <script src="xlsx.js"></script>
+        <script src="require.js"></script>
 
     </head>
 
-    <body>
+    <body onload="readFile()">
     <div class="wrapper">
         <div class="sidebar" data-color="white" data-active-color="warning"> 
       
@@ -92,32 +96,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                     <div class="row"> <!--INHOUD-->
                         
                         <!--Cijferboxen-->
-                        <div class="col-lg-4"> <!-- col-sm-6 toevoegen als eerst 2 per regen en dan 1. Eerste cijferbox-->
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big "> <!--warning, danger, info, succes-->
-                                                <i class= "fa fa-bell-o text-success"></i> <!-- Aangepast 30-5-->
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Door-to-Needle:</p> <!--AANGEPAST 6-6-->
-                                                <p class="card-title">127</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <hr> <!--de lijn tussen footer en body-->
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Update Now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                
-                        <div class="col-lg-4"> <!--Tweede cijferbox-->
+                        <div class="col-lg-4"> <!--Eerste cijferbox-->
                             <div class="card card-stats">
                                 <div class="card-body">
                                     <div class="row">
@@ -129,76 +108,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                         <div class="col-7 col-md-8">
                                             <div class="numbers">
                                                 <p class="card-category">Aantal IVT dit jaar: </p>
-                                                <p class="card-title">86</p>
+                                                <p class="card-title" id="ivtPatAMC"></p> <!--AANGEPAST 22-6-->
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4"> <!--Derde cijferbox-->
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big "> <!-- text- warning, danger, info, succes-->
-                                                <i class="fa fa-medkit text-success"></i>
-                                            </div>
-                                        </div>
-                                         <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Aantal IAT dit jaar:</p>
-                                                <p class="card-title">123</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                       <div class="col-lg-4"> <!--Vierde cijferbox-->
+                        </div> 
+                        
+                        <div class="col-lg-4"> <!--Tweede cijferbox-->
                             <div class="card card-stats">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-5 col-md-4">
                                             <div class="icon-big "> <!--warning, danger, info, succes-->
-                                                <i class="fa fa-bell-o text-success"></i>
-                                            </div>
-                                        </div>
-                                       <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Door-to-Groin:</p>
-                                                <p class="card-title">129</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer ">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-refresh"></i> Update Now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"> <!--Vijfde cijferbox-->
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big "> <!--warning, danger, info, succes-->
-                                                <i class="fa fa-line-chart text-warning"></i>
+                                                <i class="fa fa-line-chart text-success"></i>
                                             </div>
                                         </div>
                                         <div class="col-7 col-md-8">
@@ -209,21 +133,62 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>    
+                        
+                        <div class="col-lg-4"> <!-- col-sm-6 toevoegen als eerst 2 per regen en dan 1. Tweede cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big "> <!--warning, danger, info, succes-->
+                                                <i class= "fa fa-clock-o text-success"></i> <!-- Aangepast 30-5-->
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Deur-tot-Naald:</p> <!--AANGEPAST 22-6 NU ivt en iat opgetelt-->
+                                                <p class="card-title" id="ivtIatPat"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card-footer ">
-                                    <hr>
+                                    <hr> <!--de lijn tussen footer en body-->
                                     <div class="stats">
                                         <i class="fa fa-refresh"></i> Mediaan laatste 15 patiënten
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
-                        <div class="col-lg-4"> <!-- Zesde cijferbox-->
+                        </div>  
+                        
+                        <div class="col-lg-4"> <!--Derde cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big "> <!-- text- warning, danger, info, succes-->
+                                                <i class="fa fa-medkit text-info"></i>
+                                            </div>
+                                        </div>
+                                         <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Aantal IAT dit jaar:</p>
+                                                <p class="card-title" id="iatPat"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                               
+                        <div class="col-lg-4"> <!-- Vijfde cijferbox-->
                             <div class="card card-stats">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-5 col-md-4">
                                             <div class="icon-big"> <!--warning, danger, info, succes-->
-                                                <i class="fa fa-line-chart text-warning"></i>
+                                                <i class="fa fa-line-chart text-info"></i>
                                             </div>
                                         </div>
                                         <div class="col-7 col-md-8">
@@ -234,6 +199,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4"> <!--Zesde cijferbox-->
+                            <div class="card card-stats">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5 col-md-4">
+                                            <div class="icon-big "> <!--warning, danger, info, succes-->
+                                                <i class="fa fa-clock-o text-info"></i>
+                                            </div>
+                                        </div>
+                                       <div class="col-7 col-md-8">
+                                            <div class="numbers">
+                                                <p class="card-category">Deur-tot-Lies:</p>
+                                                <p class="card-title">129</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card-footer ">
                                     <hr>
                                     <div class="stats">
@@ -242,18 +227,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                 </div>
                             </div>
                         </div>
-                    </div>                   
-                
-                <div class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <script>
-                                csvJSON('Strokedashboard tijden_anoniem_Label_ipv_value.csv');
-                            </script>
-                        </div>
-                    </div>
-                </div>
-                
+                    </div>                  
                 
                     <!--Grafieken en tabellen-->
                     <div class="row">
